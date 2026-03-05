@@ -8,17 +8,27 @@ An [Agent Skills](https://agentskills.io) compatible skill that scaffolds new pr
 
 ## Install
 
+### Claude Code
+
 ```bash
+# From marketplace (if published)
+/skill install motiful/repo-scaffold
+
+# Or manual
 git clone https://github.com/motiful/repo-scaffold ~/skills/repo-scaffold
+ln -s ~/skills/repo-scaffold/skill ~/.claude/skills/repo-scaffold
 ```
 
-Then register on your platform:
+### Cursor
 
-| Platform | Command |
-|----------|---------|
-| Claude Code | `ln -s ~/skills/repo-scaffold/skill ~/.claude/skills/repo-scaffold` |
-| Cursor | `ln -s ~/skills/repo-scaffold/skill ~/.cursor/skills/repo-scaffold` |
-| Other | Symlink or copy `skill/` to your agent's skills directory |
+```bash
+git clone https://github.com/motiful/repo-scaffold ~/skills/repo-scaffold
+ln -s ~/skills/repo-scaffold/skill ~/.cursor/skills/repo-scaffold
+```
+
+### Other Platforms
+
+Clone the repo and symlink/copy `skill/` to your agent's skills directory.
 
 ## The Pattern
 
