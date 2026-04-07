@@ -1,0 +1,23 @@
+description: >
+  Project workspace scaffolding for AI-driven development. Pick an archetype
+  (public split-repo or private monorepo), get the right structure with AI
+  configuration, backstage separation, and skill organization built in.
+topics:
+  # Tier 1: big traffic
+  - ai
+  - ai-agents
+  - developer-tools
+  - cli
+  # Tier 2: domain-specific
+  - project-scaffolding
+  - repo-template
+  - monorepo
+  - workspace
+  # Tier 3: ecosystem / platform
+  - claude-code
+  - codex
+  - cursor
+  - windsurf
+  - github-copilot
+  - agent-skills
+homepage: ""

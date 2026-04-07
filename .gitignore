@@ -1,2 +1,8 @@
 .DS_Store
+Thumbs.db
 *.skill
+node_modules/
+dist/
+.env*
+.idea/
+.vscode/
