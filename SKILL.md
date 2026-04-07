@@ -4,7 +4,9 @@ description: >-
   Scaffold a new project workspace. Supports two archetypes: public open-source
   (split repos with independent skill distribution) and private monorepo
   (unified codebase with optional doc separation). Use when the user says
-  "scaffold a project", "set up a workspace", or "create a new repo".
+  "scaffold a project", "set up a workspace", or "create a new repo". Also
+  called by skill-forge when creating a complex new skill that needs a full
+  workspace with backstage.
 license: MIT
 metadata:
   author: motiful
@@ -17,7 +19,7 @@ Scaffold a new project with appropriate repo structure and AI configuration.
 
 ## When to Use
 
-User wants to create a new project, scaffold a repo, or set up a workspace.
+User wants to create a new project, scaffold a repo, or set up a workspace. Also invoked by skill-forge when scaffolding a new standalone skill that needs a backstage for design docs and iteration plans. In that case, skill-forge passes "git init but skip push" — the push is handled by skill-forge's own Step 4.
 
 ## Execution Procedure
 
