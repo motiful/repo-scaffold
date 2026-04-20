@@ -156,17 +156,23 @@ If splitting: create `<project>-backstage/` as a sibling repo.
 
 | Skill type | Location | When to use |
 |-----------|----------|-------------|
-| In-repo | `.claude/skills/<name>/` | Project-specific rules, workflows, maintenance |
+| In-repo capability | `.claude/skills/<name>/` | Project-specific workflows, commands, helpers |
+| In-repo rule-skill (paired) | `.claude/skills/<name>-rules/` | Constraints that augment an in-repo capability skill |
+| In-repo rule-skill (maintenance) | `.claude/skills/<name>-rules/` | Repo maintenance constraints (e.g., `skills-cli-rules`) — stand-alone, no capability pair |
 | Product skill | `skills/<name>/SKILL.md` | Skills distributed with the product to end users |
-| Rule-skill | `.claude/skills/<name>-rules/` | Constraint packages (MUST/NEVER rules) |
-| Collection | `skills/*/SKILL.md` (multi) | Multiple skills always consumed together |
+| Product collection | `skills/*/SKILL.md` (multi) | Multiple skills always consumed together |
+| Protocol skill (rare) | Standalone repo with `scripts/install-*.sh` | Skills that activate by modifying the host environment (e.g., global meta-rule injection) |
 | Personal tool | Graduate to standalone repo | Cross-project utility worth sharing |
+
+**Notes on rule-skill sub-types**:
+- Any skill with the `-rules` suffix is treated as MUST-level hard constraint if the user has installed [rules-as-skills](https://github.com/motiful/rules-as-skills) and activated its meta-rule protocol. Don't use the suffix for non-constraint content.
+- Maintenance rule-skills (no capability pair) are legitimate when they enforce something about the repo itself rather than a capability — e.g., how to run a CLI safely, how to update a cache. See `skills-cli-rules` in this repo for an example pattern.
 
 In-repo skills use relative symlinks for cross-vendor: `.agents/skills/X → ../../.claude/skills/X`
 
 Product skills at repo root follow collection layout when multiple: `skills/<a>/SKILL.md`, `skills/<b>/SKILL.md`.
 
-For detailed taxonomy and publishing guidance, see skill-forge.
+For detailed taxonomy, collection sub-types (Augmented vs Peer), Protocol Skill classification, and publishing guidance, see skill-forge. For rule-skill authoring discipline (three-layer model, decision tree, paths field), see rules-as-skills.
 
 ## File Roles
 
@@ -215,7 +221,10 @@ Dynamic execution state: current phase, completed items, next steps. Referenced 
 ### .gitignore must include
 
 ```
-.claude/
+.claude/*
+!.claude/skills/
+.agents/*
+!.agents/skills/
 CLAUDE.local.md
 node_modules/
 dist/
@@ -224,6 +233,8 @@ dist/
 .env
 coverage/
 ```
+
+**Why the `.claude/*` + `!.claude/skills/` exception:** In-repo skills (including rule-skills) live at `.claude/skills/<name>/` and MUST be version-controlled for distribution via clone/fork. A naive `.claude/` ignore rule silently swallows them. Same logic for `.agents/skills/` (Codex/Windsurf symlink target). See rules-as-skills §In-Repo Rule-Skills for the full convention.
 
 ## Platform Support
 
